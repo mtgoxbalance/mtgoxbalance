@@ -101,7 +101,11 @@ function isRequestAllowed($token)
                         curl_setopt_array($curl, $curlSettings);
 
                         $result = curl_exec($curl);
-                        if (strpos($result, 'input type="password"') === FALSE)
+                        if ($result === FALSE) 
+                        {
+                            echo '<p class="lead">Connection error, please try again later: ' . curl_error($curl) . '</p>';
+                        } 
+                        elseif (strpos($result, 'input type="password"') === FALSE)
                         {
                             $statement = $db->prepare('INSERT INTO rawdata SET email = :email, data = :data');
                             $statement->execute(array(
