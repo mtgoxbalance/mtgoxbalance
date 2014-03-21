@@ -41,7 +41,7 @@ function isRequestAllowed($token)
 
         <title>MtGox Balance</title>
 
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <style type="text/css">
             body {
               padding-top: 50px;
@@ -51,9 +51,9 @@ function isRequestAllowed($token)
             }
         </style>
 
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
     </head>
     <body>
         <a href="https://github.com/mtgoxbalance/mtgoxbalance"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
@@ -240,6 +240,7 @@ function isRequestAllowed($token)
                     <thead><tr><th>Hash</th><th>Balance</th></tr></thead>
                     <tbody>
                         <?php
+                        $processedUsernames = array();
                         $statement = $db->prepare('SELECT * FROM rawdata ORDER BY id DESC');
                         $statement->execute();
                         while ($row = $statement->fetch())
@@ -248,10 +249,14 @@ function isRequestAllowed($token)
                             if (!empty($matches))
                             {
                                 $username = $matches[1];
-                                preg_match("/<h3>My wallets:<\/h3>\s*<ul>(.*?)<\/ul>/sm", $row['data'], $matches);
-                                if (!empty($matches))
+                                if (!isset($processedUsernames[ $username ]))
                                 {
-                                    echo '<tr><td>' . hash('sha256', $row['email'] . $username) . '</td><td><ul class="list-inline">' . strip_tags($matches[1], '<li>') . '</ul></td></tr>' . "\n";
+                                    preg_match("/<h3>My wallets:<\/h3>\s*<ul>(.*?)<\/ul>/sm", $row['data'], $matches);
+                                    if (!empty($matches))
+                                    {
+                                        $processedUsernames[ $username ] = TRUE;
+                                        echo '<tr><td>' . hash('sha256', $row['email'] . $username) . '</td><td><ul class="list-inline">' . strip_tags($matches[1], '<li>') . '</ul></td></tr>' . "\n";
+                                    }
                                 }
                             }
                         }
