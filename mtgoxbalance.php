@@ -9,7 +9,7 @@ function isRequestAllowed($token)
 
     $cacheKey = 'mtgoxbalance-antiflood-' . sprintf('%u', ip2long($_SERVER['REMOTE_ADDR']));
     $attempts = $memcached->get($cacheKey);
-    if ($attempts > MAX_REQUESTS_PER_MINUTE)
+    if ($attempts >= MAX_REQUESTS_PER_MINUTE)
     {
         return FALSE;
     }
