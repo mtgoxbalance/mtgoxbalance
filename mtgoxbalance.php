@@ -63,7 +63,13 @@ function isRequestAllowed($token)
         <div class="container">
           <div class="starter-template">
             <h1>MtGox Balance</h1>
-            <p class="lead">Use this tool to add your MtGox balance to our list.<br> All you need to do is login to MtGox, <a class="my-popover" title="Get your session id" data-toggle="popover" data-container="body" data-html="true" data-content="<a href='http://www.wikihow.com/View-Cookies' target='_blank'>How to view cookies</a><br><br>Search for www.mtgox.com and copy the ‘value’ string in PHPSESSID.  Example: 5ie80p13q6qk8bt89suk2crrk5">get your session id</a> and paste it here together with your email.<br>This email does not have to be your MtGox email.</p>
+            <p class="lead">
+             Use this tool to add your MtGox balance to our list.<br>
+             All you need to do is login to MtGox, <a class="my-popover" title="Get your session id" data-toggle="popover" data-container="body" data-html="true" data-content="<a href='http://www.wikihow.com/View-Cookies' target='_blank'>How to view cookies</a><br><br>Search for www.mtgox.com and copy the ‘value’ string in PHPSESSID.  Example: 5ie80p13q6qk8bt89suk2crrk5">get your session id</a> and paste it here together with your email.<br>
+             This email does not have to be your MtGox email, in fact for privacy reasons, you <b>should not</b> use any email address known to anyone that you don't want to show your balance to.<br>
+             Also note, that as of now, it is possible to guess your email address provided here if you were registered on MtGox before the hack of 2011.<br>
+             Once again for privacy reasons, you should log off from the MtGox after your balance data is fetched.
+           </p>
           </div>
         </div>
         <div class="container">
