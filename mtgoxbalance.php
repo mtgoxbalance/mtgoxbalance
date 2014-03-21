@@ -49,6 +49,9 @@ function isRequestAllowed($token)
             .starter-template {
               text-align: center;
             }
+            .popover-content {
+                font-size: 1em;
+            }
         </style>
 
         <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -56,11 +59,11 @@ function isRequestAllowed($token)
         <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
     </head>
     <body>
-        <a href="https://github.com/mtgoxbalance/mtgoxbalance"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+        <a href="https://github.com/mtgoxbalance/mtgoxbalance" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
         <div class="container">
           <div class="starter-template">
             <h1>MtGox Balance</h1>
-            <p class="lead">Use this tool to add your MtGox balance to our list.<br> All you need to do is login to MtGox, get your session id and paste it here together with your email.<br>This email does not have to be your MtGox email.</p>
+            <p class="lead">Use this tool to add your MtGox balance to our list.<br> All you need to do is login to MtGox, <a class="my-popover" title="Get your session id" data-toggle="popover" data-container="body" data-html="true" data-content="<a href='http://www.wikihow.com/View-Cookies' target='_blank'>How to view cookies</a><br><br>Search for http://www.mtgox.com and copy the ‘value’ string in PHPSESSID.  Example: 5ie80p13q6qk8bt89suk2crrk5">get your session id</a> and paste it here together with your email.<br>This email does not have to be your MtGox email.</p>
           </div>
         </div>
         <div class="container">
@@ -100,7 +103,7 @@ function isRequestAllowed($token)
                                 ':data'  => $result,
                             ));
                             $success = TRUE;
-                            echo '<p class="lead">Success! You can log out from MtGox now. Make sure to clear your cookies as well.</p>';
+                            echo '<p class="lead">Success! You can log out from MtGox now. Make sure to <a class="my-popover" title="Clear your cookies" data-toggle="popover" data-container="body" data-content="Look for a delete/clear button where you found the cookie, or right-click and delete it.">clear your cookies</a> as well.</p>';
                         }
                         else
                         {
@@ -266,5 +269,15 @@ function isRequestAllowed($token)
             </div>
         </div>
         <footer class="container" style="font-size:0.9em; text-align:center; margin-top:75px;">Free software and website sponsored by Olivier Janssens / MtGoxRecovery - Thanks to Robrecht, Lucas, Sven, lnovy and many others!</footer>
+        <script type="text/javascript">
+            $('[data-toggle="popover"]').popover({});
+            $('body').on('click', function (e) {
+            //did not click a popover toggle or popover
+            if ($(e.target).data('toggle') !== 'popover'
+                && $(e.target).parents('.popover.in').length === 0) {
+                $('[data-toggle="popover"]').popover('hide');
+            }
+        });
+        </script>
     </body>
 </html>
