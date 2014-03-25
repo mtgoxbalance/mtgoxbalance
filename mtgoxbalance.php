@@ -1,4 +1,25 @@
-<?php session_start(); const MAX_REQUESTS_PER_MINUTE = 5; $sessionTokenIsSet = FALSE; $sessionToken = (isset($_SESSION['token'])) ? $_SESSION['token'] : ''; $db = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'] . ';charset=utf8', $_ENV['DB_USER'], $_ENV['DB_PASS']); ?>
+<?php /* mtgoxbalance.php -- website to confirm your mtgox balance
+
+    Copyright (C) 2014 Lucas Aerbeydt and Lukas -krtek.net- Novy
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+         Lucas Aerbeydt             Lukas -krtek.net- Novy
+    lucas.aerbeydt@gmail.com         lukas.novy@pirati.cz    
+*/
+
+session_start(); const MAX_REQUESTS_PER_MINUTE = 5; $sessionTokenIsSet = FALSE; $sessionToken = (isset($_SESSION['token'])) ? $_SESSION['token'] : ''; $db = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'] . ';charset=utf8', $_ENV['DB_USER'], $_ENV['DB_PASS']); ?>
 <?php
 function isRequestAllowed($token)
 {
